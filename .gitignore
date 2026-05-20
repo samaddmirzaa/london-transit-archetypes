@@ -1,0 +1,24 @@
+# Data too large to commit, source is TfL Open Data
+data/raw/
+data/processed/
+
+# Python bytecode and caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Conda / virtual envs
+.env
+.venv/
+env/
+
+# PyCharm project files
+.idea/
+
+# OS junk
+.DS_Store
+Thumbs.db

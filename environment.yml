@@ -1,0 +1,18 @@
+name: london-transit
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - openpyxl
+  - pyarrow
+  - scikit-learn
+  - scipy
+  - matplotlib
+  - seaborn
+  - plotly
+  - folium
+  - jupyter
+  - ipykernel
+  - joblib
