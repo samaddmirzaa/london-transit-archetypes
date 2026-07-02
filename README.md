@@ -1,6 +1,6 @@
 # London Transit Archetypes
 
-Unsupervised machine learning applied to Transport for London's rail network. The project takes a year of quarter-hourly passenger data and asks a simple question: if you ignore where stations are and look only at how people use them, what kinds of station does London actually have?
+The project takes a year of quarter-hourly passenger data and asks a simple question: if you ignore where stations are and look only at how people use them, what kinds of station does London actually have?
 
 TfL already knows where every station sits and which lines serve it. What is far less obvious is the behavioural pattern of a station: when people tap in and out, which way the flow runs at rush hour, how the rhythm changes at the weekend, and how much of the traffic is people changing trains rather than starting or ending a journey. Stations that sit miles apart on the map can behave almost identically, and next door neighbours can behave nothing alike.
 
