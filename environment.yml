@@ -16,3 +16,6 @@ dependencies:
   - jupyter
   - ipykernel
   - joblib
+  - streamlit
+  - folium
+  - streamlit-folium
