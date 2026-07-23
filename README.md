@@ -50,7 +50,7 @@ The pipeline runs in stages, each in its own notebook. The guiding idea througho
 
 **8. Recommender.** A cosine similarity search over the feature fingerprints answers a plain question: given a station, which others behave most like it? Cosine rather than straight-line distance, because it compares the shape of a station's behaviour rather than its size.
 
-## The six archetypes
+## The Archetypes
 
 Each type is named from its behaviour, with a few well known stations given as anchors.
 
@@ -67,7 +67,7 @@ Each type is named from its behaviour, with a few well known stations given as a
 
 The 22 flagged stations fall into three recognisable groups. There is the West End night and weekend cluster, with Leicester Square, Piccadilly Circus and Covent Garden, which combine very high late night activity with being busier at weekends than on weekdays. There are the extreme interchange giants, including West Ham with the highest interchange share in the network, along with Bank, Stratford and Oxford Circus. And there are a few tiny outer oddities that sit far from everything else in the opposite direction. These are not errors to remove and are distinct in behaviour due to their characteristics.
 
-## The app
+## The App
 
 The Streamlit app is where the whole thing becomes usable. Pick any of the 432 stations and it shows:
 
