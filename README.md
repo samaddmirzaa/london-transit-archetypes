@@ -4,22 +4,20 @@
 
 Unsupervised machine learning applied to Transport for London's rail network. The project takes a year of quarter-hourly passenger data and asks a simple question: if you ignore where stations are and look only at how people use them, what kinds of station does London actually have?
 
-The answer turns out to be six. This project finds those six types, checks that they are real rather than an accident of the algorithm, gives them names, flags the handful of stations that fit none of them, and finishes with an interactive app where you can search any station and see its type, its daily rhythm and the stations most like it.
+The answer turns out to be six. This project finds those six types, checks how they came to be by the algorithm, gives them names, flags the handful of stations that fit none of them, and finishes with an interactive app where you can search any station and see its type, its daily rhythm and the stations most like it.
 
-## The question
-
-TfL already knows where every station sits and which lines serve it. What is far less obvious is the behavioural pattern of a station: when people tap in and out, which way the flow runs at rush hour, how the rhythm changes at the weekend, and how much of the traffic is people changing trains rather than starting or ending a journey. Stations that sit miles apart on the map can behave almost identically, and next door neighbours can behave nothing alike.
+TfL already knows where every station sits and which lines serve it. What is far less obvious is the behavioural pattern of a station: when people tap in and out, which way the flow runs at rush hour, how the rhythm changes at the weekend, and how much of the traffic is people changing trains rather than starting or ending a journey. Stations that sit miles apart on the map can behave similar to one another, and next door neighbours can behave nothing alike.
 
 This project groups stations by behaviour alone. No location information is used anywhere in the modelling. The fact that the resulting groups then line up cleanly with real London geography, with residential types ringing the outer zones, workplace types clustered in the centre and interchange types sitting on the real junctions, is one of the main results and good evidence that the patterns are genuine.
 
-## The data
+## Data
 
 The source is TfL's NUMBAT 2024 dataset, a detailed model of rail demand across the London Underground, Overground, DLR, Elizabeth line and Trams.
 
 * Five files, one per day type: Monday, an average Tuesday to Thursday (the typical mid week day), Friday, Saturday and Sunday.
 * Each station's day is split into 96 quarter-hour slices, running on the traffic day from 05:00 to 04:59 rather than midnight to midnight.
 * Entries and exits are recorded separately. This separation is what makes the directional features possible.
-* There are 471 stations in the raw files. These are filtered down to the 432 that are genuinely active. The 39 that are removed are Croydon tram stops with no gatelines, so they record no entries or exits at all.
+* There are 471 stations in the raw files. These are filtered down to the 432 that are active. The 39 that are removed are Croydon tram stops with no gatelines, so they record no entries or exits at all.
 
 Station coordinates come from a separate TfL Freedom of Information release, joined to the passenger data on the National Location Code. That file covers all 432 active stations with no gaps, which is why the map has complete coverage.
 
@@ -67,9 +65,7 @@ Each type is named from its behaviour, with a few well known stations given as a
 
 ## Anomalies
 
-The 22 flagged stations fall into three recognisable groups. There is the West End night and weekend cluster, with Leicester Square, Piccadilly Circus and Covent Garden, which combine very high late night activity with being busier at weekends than on weekdays. There are the extreme interchange giants, including West Ham with the highest interchange share in the network, along with Bank, Stratford and Oxford Circus. And there are a few tiny outer oddities that sit far from everything else in the opposite direction.
-
-None of these is an error to remove. They are London's genuinely distinctive stations, and every one is a place a Londoner would recognise as unusual.
+The 22 flagged stations fall into three recognisable groups. There is the West End night and weekend cluster, with Leicester Square, Piccadilly Circus and Covent Garden, which combine very high late night activity with being busier at weekends than on weekdays. There are the extreme interchange giants, including West Ham with the highest interchange share in the network, along with Bank, Stratford and Oxford Circus. And there are a few tiny outer oddities that sit far from everything else in the opposite direction. These are not errors to remove and are distinct in behaviour due to their characteristics.
 
 ## The app
 
@@ -77,7 +73,7 @@ The Streamlit app is where the whole thing becomes usable. Pick any of the 432 s
 
 * Where it sits on a map of London, with every station coloured by archetype using TfL's own line colours and sized by daily volume.
 * Its archetype, daily entries, lines served, interchange share, whether it acts as a morning origin or destination, and how its Saturday compares to its weekday.
-* Its daily rhythm plotted against the average rhythm of its archetype, so you can see how closely it matches its type. Leicester Square is a good one to try, because its curve stays high late into the night while its archetype's average collapses after the evening peak, which is exactly why the anomaly detection flags it.
+* Its daily rhythm plotted against the average rhythm of its archetype, so you can see how closely it matches its type. 
 * The five stations that behave most like it.
 
 ## Tech stack
@@ -117,10 +113,6 @@ london-transit-archetypes/
 └── README.md
 ```
 
-Most of `data/processed/` is not committed, since it is regenerated by running the notebooks. The three small parquet files the app needs are committed so the deployed app can read them.
-
-Principal Component Analysis was also explored during the project. It was analysed in full, then deliberately set aside for the modelling because it slightly reduced cluster stability on these particular features, which is a small result in its own right about when a standard technique does and does not help.
-
 ## Running it
 
 To explore the results, just open the [live app](https://samaddmirzaa-london-transit-archetypes-app-l8vnmv.streamlit.app/). To run the analysis yourself:
@@ -130,7 +122,3 @@ To explore the results, just open the [live app](https://samaddmirzaa-london-tra
 3. Run the notebooks in order from `01` through `08`. Each one reads the output of the previous stage and writes its own output to `data/processed/`.
 
 To run the app locally, `pip install -r requirements.txt` and then `streamlit run app.py` from the project root.
-
-## A note on the approach
-
-A theme running through this project is that a technique being standard does not make it necessary for a given dataset. PCA was tested and set aside. The silhouette score was used to find a sensible range of cluster counts rather than blindly maximised, because on its own it favours a small number of tidy but useless clusters. DBSCAN was allowed to fail as a clustering method because that failure was itself informative about the shape of the data. K-Means was kept at six clusters rather than four even though four is more stable, because six gives archetypes that are more useful to describe, and the trade off is stated rather than hidden. Most of the decisions here were made by testing an option against the actual data rather than assuming it would work.
