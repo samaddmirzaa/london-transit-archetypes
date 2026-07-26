@@ -2,7 +2,7 @@
 
 **[Explore the live app](https://samaddmirzaa-london-transit-archetypes-app-l8vnmv.streamlit.app/)**
 
-Unsupervised machine learning applied to Transport for London's rail network. The project takes a year of quarter-hourly passenger data and asks a simple question: if you ignore where stations are and look only at how people use them, what kinds of station does London actually have?
+The project takes a year of quarter-hourly passenger data and asks a simple question: if you ignore where stations are and look only at how people use them, what kinds of station does London actually have?
 
 The answer turns out to be six. This project finds those six types, checks how they came to be by the algorithm, gives them names, flags the handful of stations that fit none of them, and finishes with an interactive app where you can search any station and see its type, its daily rhythm and the stations most like it.
 
