@@ -87,7 +87,6 @@ The Streamlit app is where the whole thing becomes usable. Pick any of the 432 s
 * Streamlit for the app, deployed on Streamlit Community Cloud
 * Parquet via pyarrow for fast intermediate storage
 * joblib for saving fitted models
-* Developed in PyCharm with a conda environment
 
 ## Repository structure
 
