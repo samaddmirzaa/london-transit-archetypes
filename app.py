@@ -67,7 +67,7 @@ with col_map:
         max_bounds=True,
         min_lat=51.20, max_lat=51.80,
         min_lon=-1.10, max_lon=0.45,
-        tiles='cartodbvoyager',
+        tiles='OpenStreetMap',
     )
 
     size_min = stations['log_total_weekday'].min()
